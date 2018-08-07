@@ -8,5 +8,4 @@ router.register(r"goods",BookGoodsView)
 
 urlpatterns=[
     url(r'^',include(router.urls)),
-    # url(r'category/(?P<category_id>\d+)/',BookCategoryView.as_view()),
 ]

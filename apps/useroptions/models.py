@@ -20,6 +20,7 @@ class UserFav(models.Model):
     class Meta:
         verbose_name = '用户收藏'
         verbose_name_plural = verbose_name
+        # 用户反复对一件商品进行收藏，理论上不应该生成两条收藏关系记录
         unique_together = ("user", "books")
         db_table="userfav"
 

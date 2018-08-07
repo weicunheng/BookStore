@@ -18,7 +18,18 @@ class BookCategorySerilizer(serializers.ModelSerializer):
         model = models.BooksCategory
         fields = "__all__"
 
+
+# 商品 主图  序列化
+class GoodImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.BooksImage
+        fields=("image",)
+
+
 class BookGoodsViewSerializer(serializers.ModelSerializer):
+    category = BookCategorySerilizer()
+    images = GoodImagesSerializer(many=True)
+
     class Meta:
         model = models.Books
         fields = "__all__"

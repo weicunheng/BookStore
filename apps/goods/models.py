@@ -116,7 +116,7 @@ class IndexAd(models.Model):
 
 class BooksImage(models.Model):
     """
-    商品轮播图
+    商品主图 轮播图
     """
     goods = models.ForeignKey(Books, verbose_name="商品", related_name="images")
     image = models.ImageField(upload_to="", verbose_name="图片", null=True, blank=True)

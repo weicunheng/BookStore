@@ -1,7 +1,15 @@
+-- 接口
 
+# 验证码获取接口
+"code": "http://127.0.0.1:8000/code/",
+# 用户注册接口
+"users": "http://127.0.0.1:8000/users/",
+# 商品分类相关接口
+"category": "http://127.0.0.1:8000/category/",
+# 商品接口:
+"goods": "http://127.0.0.1:8000/goods/",
 # 查询 10-40的商品
 http://127.0.0.1:8000/goods/?price__min=10&price__max=40&price=
-
-
-
+# 用户收藏接口
+"userfavs": "http://127.0.0.1:8000/userfavs/"
 

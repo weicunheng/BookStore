@@ -18,9 +18,6 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from BookStore import settings
 from django.views.static import serve
-from apps.goods import urls as goodsurl
-from apps.user import urls as userurl
-from apps.useroptions import urls as favurl
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 import DjangoUeditor.urls
@@ -48,7 +45,5 @@ urlpatterns = [
     # TokenAuthentions
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^ueditor/',include(DjangoUeditor.urls)),
-
-
 ]
 

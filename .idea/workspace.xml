@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cfc44ab-b7c2-40ec-ae08-2247d18a10a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/useroptions/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/useroptions/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/utils/permissions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStore/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BookStore/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookStore/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BookStore/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/goods/goodsfilter.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/goodsfilter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/goods/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/goods/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/goods/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/useroptions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/useroptions/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/useroptions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/useroptions/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/useroptions/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/useroptions/serializers.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,34 +51,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="userfav" pinned="false" current-in-tab="true">
-        <entry file="das://0cd4d4d3-e9de-4250-9bed-b4385c3bf67f/schema/bookstore/table/userfav">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/useroptions/views.py">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BookStore/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="38" />
+            <state relative-caret-position="1012">
+              <caret line="46" column="50" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#643#652#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BookStore/settings.py">
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/useroptions/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-22">
-              <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
+            <state relative-caret-position="132">
+              <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
               <folding>
-                <element signature="e#314#329#0" expanded="true" />
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -147,12 +126,12 @@
         <option value="$PROJECT_DIR$/apps/useroptions/models.py" />
         <option value="$PROJECT_DIR$/apps/utils/permissions.py" />
         <option value="$PROJECT_DIR$/apps/useroptions/urls.py" />
-        <option value="$PROJECT_DIR$/BookStore/urls.py" />
         <option value="$PROJECT_DIR$/apps/useroptions/views.py" />
         <option value="$PROJECT_DIR$/apps/goods/serializers.py" />
         <option value="$PROJECT_DIR$/apps/goods/views.py" />
-        <option value="$PROJECT_DIR$/apps/useroptions/serializers.py" />
         <option value="$PROJECT_DIR$/BookStore/settings.py" />
+        <option value="$PROJECT_DIR$/BookStore/urls.py" />
+        <option value="$PROJECT_DIR$/apps/useroptions/serializers.py" />
       </list>
     </option>
   </component>
@@ -192,24 +171,7 @@
               <item name="BookStore" type="b2602c69:ProjectViewProjectNode" />
               <item name="BookStore" type="462c0819:PsiDirectoryNode" />
               <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="goods" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BookStore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BookStore" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
               <item name="useroptions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BookStore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BookStore" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BookStore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BookStore" type="462c0819:PsiDirectoryNode" />
-              <item name="BookStore" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BookStore" type="b2602c69:ProjectViewProjectNode" />
@@ -393,21 +355,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49932975" weight="0.32756132" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.30764076" side_tool="true" weight="0.48991355" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.69235927" visible="true" weight="0.5497835" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69235927" weight="0.5497835" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32900432" />
       <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.49932975" weight="0.45743147" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49932975" weight="0.48991355" />
-      <window_info anchor="bottom" id="Database Console" order="14" weight="0.3299712" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2272118" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2272118" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" visible="true" weight="0.26206434" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32900432" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32756132" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3297587" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" weight="0.32900432" />
@@ -419,6 +380,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Database Console" order="14" weight="0.3299712" />
       <window_info active="true" anchor="bottom" id="manage.py@BookStore" order="8" visible="true" weight="0.3299712" />
     </layout>
     <layout-to-restore>
@@ -726,16 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BookStore/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
-          <folding>
-            <element signature="e#643#652#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/goods/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -800,16 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/useroptions/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BookStore/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-22">
@@ -817,6 +759,13 @@
           <folding>
             <element signature="e#314#329#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://0cd4d4d3-e9de-4250-9bed-b4385c3bf67f/schema/bookstore/table/userfav">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -830,10 +779,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://0cd4d4d3-e9de-4250-9bed-b4385c3bf67f/schema/bookstore/table/userfav">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/BookStore/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1012">
+          <caret line="46" column="50" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+          <folding>
+            <element signature="e#643#652#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/useroptions/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

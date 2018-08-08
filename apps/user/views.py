@@ -103,8 +103,4 @@ class UserRegViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,Generi
     def perform_create(self, serializer):
         return serializer.save()
 
-    # def update(self, request, *args, **kwargs):
-    #     print(request.data)
-    #     return super().update(request,*args,**kwargs)
-
 

@@ -1,15 +1,16 @@
 import random
 from django.shortcuts import render
 from rest_framework import status
-from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
-from apps.user.serializer import MobileValidation,UserRegValidation
+from apps.user.serializer import MobileValidation,UserRegValidation,UserDetailSerializer
 from apps.user.models import VerifyCode,UserProfile
 from apps.utils.YunPianTool import YunPian
 from BookStore.settings import YUNPIAN_APIKEY
 from rest_framework_jwt.serializers import jwt_encode_handler,jwt_payload_handler
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 class GetVerificationCode(CreateModelMixin,GenericViewSet):
 
@@ -46,7 +47,7 @@ class GetVerificationCode(CreateModelMixin,GenericViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-class UserRegViewSet(CreateModelMixin,GenericViewSet):
+class UserRegViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,GenericViewSet):
     """
     用户注册
     list:
@@ -60,6 +61,22 @@ class UserRegViewSet(CreateModelMixin,GenericViewSet):
     """
     serializer_class = UserRegValidation
     queryset = UserProfile.objects.all()
+    authentication_classes = (JSONWebTokenAuthentication,)
+
+    # 如果不是注册，就更换序列化器
+    def get_serializer_class(self):
+        if self.action == "create":
+            return UserRegValidation
+        elif self.action == "update":
+            return UserDetailSerializer
+        return UserDetailSerializer
+
+    def get_permissions(self):
+        if self.action == "create":
+            return []
+        elif self.action == "update":
+            return [IsAuthenticated()]
+        return []
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -85,3 +102,9 @@ class UserRegViewSet(CreateModelMixin,GenericViewSet):
 
     def perform_create(self, serializer):
         return serializer.save()
+
+    # def update(self, request, *args, **kwargs):
+    #     print(request.data)
+    #     return super().update(request,*args,**kwargs)
+
+

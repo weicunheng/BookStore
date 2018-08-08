@@ -93,6 +93,9 @@ class UserRegValidation(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        # del validated_data["code"]
         fields = ["username","mobile","code","password"]
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = ("name", "gender", "birthday", "email", "mobile")

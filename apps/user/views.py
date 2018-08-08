@@ -13,7 +13,7 @@ from rest_framework_jwt.serializers import jwt_encode_handler,jwt_payload_handle
 
 class GetVerificationCode(CreateModelMixin,GenericViewSet):
 
-    serializer_class = (MobileValidation,)
+    serializer_class = MobileValidation
     queryset = VerifyCode.objects.all()
 
     def getRandCode(self):
@@ -47,6 +47,17 @@ class GetVerificationCode(CreateModelMixin,GenericViewSet):
 
 
 class UserRegViewSet(CreateModelMixin,GenericViewSet):
+    """
+    用户注册
+    list:
+        xxxxlist
+    create:
+        创建用户\n
+        使用post请求,需要数据：手机号/用户名、验证码、密码\n
+        返回：注册成功，返回token；注册失败，返回401\n
+    Request Body:
+        手机号/用户名、验证码、密码,json格式
+    """
     serializer_class = UserRegValidation
     queryset = UserProfile.objects.all()
 
@@ -63,7 +74,6 @@ class UserRegViewSet(CreateModelMixin,GenericViewSet):
         用户注册完后，返回一个token
         即可自动登陆，无需注册后，拿着用户名和密码在次登陆
         """
-
 
         payload = jwt_payload_handler(user)
         token_data = serializer.data

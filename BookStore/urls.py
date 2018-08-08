@@ -25,8 +25,12 @@ from apps.user.views import GetVerificationCode,UserRegViewSet
 from apps.goods.views import BookCategoryView,BookGoodsView
 from apps.useroptions.views import UserCollectViewSet
 from rest_framework import  routers
+from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
 
+schema_view = get_schema_view(title='图书商城API文档')
 router = routers.DefaultRouter()
+
 
 router.register(r"code",GetVerificationCode,base_name="code")
 router.register(r"users",UserRegViewSet,base_name="user")
@@ -37,6 +41,8 @@ router.register(r"userfavs",UserCollectViewSet,base_name="userfavs")
 
 
 urlpatterns = [
+    url('^schema/$', schema_view),
+    url('^docs/',include_docs_urls(title="图书商城")),
     url('^',include(router.urls)),
     url(r'^admin/', admin.site.urls),
     # JWT
@@ -45,5 +51,6 @@ urlpatterns = [
     # TokenAuthentions
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^ueditor/',include(DjangoUeditor.urls)),
+
 ]
 

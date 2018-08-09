@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.useroptions.models import UserFav
+from apps.useroptions.models import UserFav,UserAddress
 from rest_framework.validators import UniqueTogetherValidator
 from apps.goods.models import Books
 
@@ -34,3 +34,12 @@ class UserCollectSerializer(serializers.ModelSerializer):
             )
         ]
         fields=("user","books","id")
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+    class Meta:
+        model = UserAddress
+        fields = "__all__"

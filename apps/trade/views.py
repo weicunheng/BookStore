@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from apps.trade.models import ShoppingCart
+from rest_framework.viewsets import ModelViewSet
+from apps.trade.serializer import ShopCartSerializer
 
-# Create your views here.
+
+
+# 购物车
+class ShopCartView(ModelViewSet):
+    queryset = ShoppingCart.objects.all()
+    serializer_class = ShopCartSerializer
+

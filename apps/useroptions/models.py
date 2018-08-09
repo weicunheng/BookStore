@@ -66,7 +66,7 @@ class UserAddress(models.Model):
     address = models.CharField(max_length=100, default="", verbose_name="详细地址")
     signer_name = models.CharField(max_length=100, default="", verbose_name="签收人")
     signer_mobile = models.CharField(max_length=11, default="", verbose_name="电话")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
 
     class Meta:
         verbose_name = "收货地址"

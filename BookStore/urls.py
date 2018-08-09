@@ -23,7 +23,8 @@ from rest_framework_jwt.views import obtain_jwt_token
 import DjangoUeditor.urls
 from apps.user.views import GetVerificationCode,UserRegViewSet
 from apps.goods.views import BookCategoryView,BookGoodsView
-from apps.useroptions.views import UserCollectViewSet
+from apps.useroptions.views import UserCollectViewSet,AddressViewSet
+from apps.trade.views import ShopCartView
 from rest_framework import  routers
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
@@ -37,6 +38,8 @@ router.register(r"users",UserRegViewSet,base_name="user")
 router.register(r"category",BookCategoryView,base_name="category")
 router.register(r"goods",BookGoodsView,base_name="goods")
 router.register(r"userfavs",UserCollectViewSet,base_name="userfavs")
+router.register(r"address",AddressViewSet,base_name="address")
+router.register(r"shopcarts",ShopCartView,base_name="shopcarts")
 
 
 

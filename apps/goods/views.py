@@ -8,15 +8,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 
 
-
+# 图书分类
 class BookCategoryView(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     queryset = BooksCategory.objects.filter(category_type=1)
     serializer_class = BookCategorySerilizer
 
 
-
-
-#图书分页
+# 图书分页
 class BookPagination(pagination.PageNumberPagination):
     page_size = 12
     page_size_query_param = 'page_size'
@@ -24,6 +22,7 @@ class BookPagination(pagination.PageNumberPagination):
     max_page_size = 100
 
 
+# 图书
 class BookGoodsView(mixins.ListModelMixin,
                     mixins.RetrieveModelMixin,
                     viewsets.GenericViewSet):
@@ -49,5 +48,4 @@ class BookGoodsView(mixins.ListModelMixin,
         instance.save()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-
 

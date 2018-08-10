@@ -24,7 +24,7 @@ import DjangoUeditor.urls
 from apps.user.views import GetVerificationCode,UserRegViewSet
 from apps.goods.views import BookCategoryView,BookGoodsView
 from apps.useroptions.views import UserCollectViewSet,AddressViewSet
-from apps.trade.views import ShopCartView
+from apps.trade.views import ShopCartView,OrderViewSet
 from rest_framework import  routers
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
@@ -40,6 +40,7 @@ router.register(r"goods",BookGoodsView,base_name="goods")
 router.register(r"userfavs",UserCollectViewSet,base_name="userfavs")
 router.register(r"address",AddressViewSet,base_name="address")
 router.register(r"shopcarts",ShopCartView,base_name="shopcarts")
+router.register(r"orders",OrderViewSet,base_name="orders")
 
 
 

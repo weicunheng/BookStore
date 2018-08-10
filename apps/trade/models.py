@@ -18,7 +18,7 @@ class ShoppingCart(models.Model):
     books = models.ForeignKey(Books, verbose_name=u"商品")
     nums = models.IntegerField(default=0, verbose_name="购买数量")
 
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name=u"添加时间")
 
     class Meta:
         verbose_name = '购物车'
@@ -55,7 +55,7 @@ class OrderInfo(models.Model):
     signer_name = models.CharField(max_length=20, default="", verbose_name="签收人")
     singer_mobile = models.CharField(max_length=11, verbose_name="联系电话")
 
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
 
     class Meta:
         verbose_name = u"订单"

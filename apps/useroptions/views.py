@@ -9,6 +9,8 @@ from rest_framework.viewsets import ModelViewSet
 from utils.permissions import IsOwnerOrReadOnly
 from apps.useroptions.models import UserFav,UserAddress
 from apps.useroptions.serializers import UserCollectSerializer,UserCollectDetailSerializer,AddressSerializer
+
+
 # 对于收藏： 添加收藏和删除收藏
 class UserCollectViewSet(ListModelMixin,CreateModelMixin,DestroyModelMixin,RetrieveModelMixin,GenericViewSet):
     # queryset = UserFav.objects.all()
@@ -21,6 +23,7 @@ class UserCollectViewSet(ListModelMixin,CreateModelMixin,DestroyModelMixin,Retri
     lookup_field = "books_id"
 
     def get_serializer_class(self):
+        # action只有继承viewset才会有
         if self.action == "list":
             return UserCollectDetailSerializer
         elif self.action == "create":
@@ -37,7 +40,6 @@ class UserCollectViewSet(ListModelMixin,CreateModelMixin,DestroyModelMixin,Retri
         return UserFav.objects.filter(user=self.request.user)
 
 
-
 # 收获地址
 class AddressViewSet(ModelViewSet):
     """
@@ -51,11 +53,13 @@ class AddressViewSet(ModelViewSet):
         delete:
             删除收货地址
     """
-    queryset = UserAddress.objects.all()
+    # queryset = UserAddress.objects.all()
     serializer_class = AddressSerializer
     permission_classes = (IsAuthenticated,IsOwnerOrReadOnly)
     authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
 
+    def get_queryset(self):
+        return UserAddress.objects.filter(user=self.request.user)
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())

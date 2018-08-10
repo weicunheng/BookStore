@@ -65,6 +65,7 @@ class UserRegViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,Generi
 
     # 如果不是注册，就更换序列化器
     def get_serializer_class(self):
+        # action只有viewset才会由，action是一个魔法
         if self.action == "create":
             return UserRegValidation
         elif self.action == "update":

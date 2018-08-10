@@ -11,6 +11,7 @@ class BooksSerializer(serializers.ModelSerializer):
         fields = ("id","name","shop_price")
 
 
+
 class UserCollectDetailSerializer(serializers.ModelSerializer):
     books = BooksSerializer()
 
@@ -40,6 +41,14 @@ class AddressSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
+    """
+    验证手机号
+    """
+
+
+    # books = BooksSerializer()
+
+
     class Meta:
         model = UserAddress
         fields = "__all__"

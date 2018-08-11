@@ -13,5 +13,4 @@ class CroessMiddleware(MiddlewareMixin):
 
         response["Access-Control-Allow-Origin"] = "*"
 
-        # Access-Control-Allow-Headers
         return response

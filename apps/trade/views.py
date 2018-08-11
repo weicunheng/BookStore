@@ -5,7 +5,7 @@ from apps.trade.models import ShoppingCart,OrderInfo,OrderGoods
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.mixins import ListModelMixin,CreateModelMixin,DestroyModelMixin
 from rest_framework.viewsets import GenericViewSet
-from apps.trade.serializer import ShopCartSerializer,ShopCartCreateSerializer,OrderSerializer,OrderDetailSerializer
+from apps.trade.serializer import ShopCartSerializer,ShopCartDetailSerializer,OrderSerializer,OrderDetailSerializer
 from rest_framework.permissions import IsAuthenticated
 from utils.permissions import IsOwnerOrReadOnly
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
@@ -16,30 +16,23 @@ from rest_framework import  status
 
 # 购物车
 class ShopCartView(ModelViewSet):
-    queryset = ShoppingCart.objects.all()
+
     serializer_class = ShopCartSerializer
     authentication_classes = (JSONWebTokenAuthentication,SessionAuthentication)
     permission_classes = (IsAuthenticated,IsOwnerOrReadOnly)
 
+    lookup_field = "books_id"
+
+    def get_queryset(self):
+        return ShoppingCart.objects.filter(user=self.request.user)
+        #get_serializer_class
     def get_serializer_class(self):
         if self.action == "create":
-            return ShopCartCreateSerializer
-        elif self.action == "list":
+            print(self.request.data)
             return ShopCartSerializer
+        elif self.action == "list":
+            return ShopCartDetailSerializer
         return ShopCartSerializer
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-
-    def perform_create(self, serializer):
-        serializer.save()
-
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -72,37 +65,40 @@ class OrderViewSet(ListModelMixin,CreateModelMixin,DestroyModelMixin,GenericView
         return OrderSerializer
 
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+    # def create(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #
+    #     print(serializer.validated_data["user"])
+    #
+    #     # 订单号
+    #     random_ins = Random()
+    #     order_sn = "{time_str}{userid}{ranstr}".format(time_str=time.strftime("%Y%m%d%H%M%S"),
+    #                                                    userid=request.user.id,
+    #                                                    ranstr=random_ins.randint(10, 99))
+    #     # pay_status = "paying"
+    #     # OrderInfo(user=request.user,
+    #     #           order_mount=serializer.validated_data["order_mount"],
+    #     #           singer_mobile = serializer.validated_data["singer_mobile"],
+    #     #           signer_name = serializer.validated_data["signer_name"],
+    #     #           address = serializer.validated_data["address"],
+    #     #           post_script = serializer.validated_data["post_script"],
+    #     #           order_sn=order_sn,
+    #     #           pay_status=pay_status).save()
+    #     # order = OrderInfo.objects.filter(user = request.user).order_by("-add_time").first()
+    #     # self.clear_cart(order)
+    #     headers = self.get_success_headers(serializer.data)
+    #
+    #     ret = serializer.data
+    #
+    #     # 先完善功能，下次修改
+    #     ret["alipay_url"] = "https://www.baidu.com"
+    #
+    #     return Response(ret, status=status.HTTP_201_CREATED, headers=headers)
 
-        print(serializer.validated_data)
-        print(serializer.validated_data["user"])
-
-        # 订单号
-        random_ins = Random()
-        order_sn = "{time_str}{userid}{ranstr}".format(time_str=time.strftime("%Y%m%d%H%M%S"),
-                                                       userid=request.user.id,
-                                                       ranstr=random_ins.randint(10, 99))
-        pay_status = "paying"
-        OrderInfo(user=request.user,
-                  order_mount=serializer.validated_data["order_mount"],
-                  singer_mobile = serializer.validated_data["singer_mobile"],
-                  signer_name = serializer.validated_data["signer_name"],
-                  address = serializer.validated_data["address"],
-                  post_script = serializer.validated_data["post_script"],
-                  order_sn=order_sn,
-                  pay_status=pay_status).save()
-        order = OrderInfo.objects.filter(user = request.user).order_by("-add_time").first()
+    def perform_create(self, serializer):
+        order = serializer.save()
         self.clear_cart(order)
-        headers = self.get_success_headers(serializer.data)
-
-        ret = serializer.data
-
-        # 先完善功能，下次修改
-        ret["alipay_url"] = "https://www.baidu.com"
-
-        return Response(ret, status=status.HTTP_201_CREATED, headers=headers)
 
     def get_queryset(self):
         return OrderInfo.objects.filter(user=self.request.user)

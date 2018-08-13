@@ -216,3 +216,11 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
     'Pragma',
 )
+
+# 支付宝支付相关
+app_id = "2016091700533057"
+app_notify_url = ""
+return_url=""
+debug=True
+app_private_key_path = os.path.join(BASE_DIR,"apps\\trade\\key\\private_2048.txt")
+alipay_public_key_path = os.path.join(BASE_DIR,"apps\\trade\\key\\alipay_key_2048.txt")

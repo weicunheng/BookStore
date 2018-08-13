@@ -28,6 +28,8 @@ from apps.trade.views import ShopCartView,OrderViewSet
 from rest_framework import  routers
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
+from apps.trade.views import AlipayView
+
 
 schema_view = get_schema_view(title='图书商城API文档')
 router = routers.DefaultRouter()
@@ -55,6 +57,7 @@ urlpatterns = [
     # TokenAuthentions
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^ueditor/',include(DjangoUeditor.urls)),
+    url(r'^alipay/return/',AlipayView.as_view(),name="alipay")
 
 ]
 

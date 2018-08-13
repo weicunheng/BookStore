@@ -1,9 +1,11 @@
 from random import Random
 import time
 from apps.goods.models import Books
-from apps.trade.models import ShoppingCart,OrderInfo
+from apps.trade.models import ShoppingCart,OrderInfo,OrderGoods
 from rest_framework import serializers
 from apps.goods.serializers import BookGoodsViewSerializer
+from trade.utils.alipayment import AliPay
+from BookStore import  settings
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -64,37 +66,54 @@ class ShopCartSerializer(serializers.Serializer):
 
 
 
+class OrderGoodsSerializer(serializers.ModelSerializer):
+
+    goods = BookGoodsViewSerializer(many=False)
+    class Meta:
+        model = OrderGoods
+        fields="__all__"
+
 class OrderDetailSerializer(serializers.ModelSerializer):
+    goods = OrderGoodsSerializer(many=True)
     class Meta:
         model = OrderInfo
-        fields = ("id","order_sn","add_time","order_mount","pay_status","post_script")
+        fields = "__all__"
 
 class OrderSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
 
-    # # 订单金额
-    # order_mount = serializers.IntegerField(allow_null=False)
-    # # 收货人手机号
-    # singer_mobile = serializers.CharField(max_length=11,allow_null=False,allow_blank=False)
-    #
-    # # 收货人
-    # signer_name = serializers.CharField(max_length=40,allow_null=True,allow_blank=True,default="")
-    # # 用户收货地址
-    # address = serializers.CharField(max_length=100,allow_null=False,allow_blank=False)
-    #
-    # # 用户留言
-    # post_script = serializers.CharField(max_length=200,allow_null=True,allow_blank=True)
 
     """
     只能读，不能写的字段
-    
     """
     order_sn = serializers.CharField(read_only=True)
     trade_no = serializers.CharField(read_only=True)
     pay_status = serializers.CharField(read_only=True)
     pay_time = serializers.DateTimeField(read_only=True)
+
+    alipay_url = serializers.SerializerMethodField(read_only=True)
+    print(settings.app_id)
+    print(settings.app_private_key_path)
+    print(settings.alipay_public_key_path)
+    def get_alipay_url(self,obj):
+        alipay = AliPay(appid=settings.app_id,
+                        app_notify_url=settings.app_notify_url,
+                        app_private_key_path=settings.app_private_key_path,
+                        alipay_public_key_path=settings.alipay_public_key_path,
+                        return_url=settings.return_url,
+                        debug=settings.debug)
+
+        # 生成支付的url
+        query_params = alipay.direct_pay(subject = obj.order_sn,
+                          out_trade_no = obj.order_sn,
+                          total_amount = obj.order_mount,
+                          return_url=None)
+
+        pay_url = "https://openapi.alipaydev.com/gateway.do?{}".format(query_params)
+
+        return pay_url
 
 
     def get_random_str(self):
@@ -115,5 +134,4 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderInfo
-        # fields = ("user","order_mount","singer_mobile","signer_name","address","post_script")
         fields = "__all__"

@@ -9,6 +9,7 @@ from rest_framework.validators import UniqueValidator
 
 UserModel = get_user_model()
 
+
 class MobileValidation(serializers.Serializer):
     """
     对手机号进行验证
@@ -61,7 +62,10 @@ class UserRegValidation(serializers.ModelSerializer):
                                      }
                                      )
 
-    # 使用django的信号量
+    """
+    使用django的信号量
+        注册时给用户设置密码，这是一种方法，我们也可以使用信号量
+    """
     # def create(self, validated_data):
     #     user = super(UserRegValidation,self).create(validated_data=validated_data)
     #     user.set_password(validated_data["password"])
@@ -69,7 +73,11 @@ class UserRegValidation(serializers.ModelSerializer):
     #     return user
 
     def validated_code(self, code):
-
+        """
+        校验 验证码
+        :param code:
+        :return:
+        """
         # 校验是否存在 ,按照手机号筛选，倒序取第一个
         code_obj = VerifyCode.objects.filter(mobile=self.initial_data["mobile"]).order_by('-add_time')[0]
         if code_obj:
@@ -95,7 +103,11 @@ class UserRegValidation(serializers.ModelSerializer):
         model = UserProfile
         fields = ["username","mobile","code","password"]
 
+
 class UserDetailSerializer(serializers.ModelSerializer):
+    """
+    用户详细信息
+    """
     class Meta:
         model = UserModel
         fields = ("name", "gender", "birthday", "email", "mobile")

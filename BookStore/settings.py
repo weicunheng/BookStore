@@ -168,6 +168,15 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     # 配置过滤
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    # 访问频率限制
+    'DEFAULT_THROTTLE_CLASSES': (
+            'rest_framework.throttling.AnonRateThrottle',
+            'rest_framework.throttling.UserRateThrottle'
+        ),
+        'DEFAULT_THROTTLE_RATES': {
+            'anon': '1/minute',
+            'user': '3/minute'
+        }
 
 }
 
@@ -224,3 +233,16 @@ return_url=""
 debug=True
 app_private_key_path = os.path.join(BASE_DIR,"apps\\trade\\key\\private_2048.txt")
 alipay_public_key_path = os.path.join(BASE_DIR,"apps\\trade\\key\\alipay_key_2048.txt")
+
+# 缓存相关 使用django-redis进行缓存
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+        }
+    }
+}
+

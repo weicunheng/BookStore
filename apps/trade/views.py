@@ -12,6 +12,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from trade.utils.alipayment import AliPay
 from rest_framework.response import Response
+from rest_framework import status
 
 
 # 购物车
@@ -25,7 +26,8 @@ class ShopCartView(ModelViewSet):
 
     def get_queryset(self):
         return ShoppingCart.objects.filter(user=self.request.user)
-        #get_serializer_class
+
+
     def get_serializer_class(self):
         if self.action == "create":
             print(self.request.data)
@@ -34,10 +36,44 @@ class ShopCartView(ModelViewSet):
             return ShopCartDetailSerializer
         return ShopCartSerializer
 
+
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+
+    def perform_create(self, serializer):
+        """
+            新增商品到购物车
+        """
+        ret = serializer.save()
+        book_obj = ret.books
+        book_obj.goods_num -= ret.nums
+        book_obj.save()
+
+
+    def perform_update(self, serializer):
+        """
+
+        :param serializer:
+        :return:
+        """
+        ret = serializer.save()
+        book_obj = ret.books
+        book_obj.goods_num -= ret.nums
+        book_obj.save()
+
+    def perform_destroy(self, instance):
+        """
+        删除购物车记录
+        :param instance:
+        :return:
+        """
+        ret = instance.delete()
+        book_obj = ret.books
+        book_obj.goods_num += ret.nums
+        book_obj.save()
 
 
 # 订单是不允许被修改的
@@ -171,7 +207,7 @@ class AlipayView(APIView):
 
             order_objs = OrderInfo.objects.filter(order_sn = order_sn)
             for order_obj in order_objs:
-                # 订单商品项
+                # 购物成功后
                 order_goods = order_obj.goods.all()
                 for order_good in order_goods:
                     goods = order_good.goods
@@ -184,7 +220,6 @@ class AlipayView(APIView):
 
                 order_obj.pay_time = datetime.now()
                 order_objs.save()
-
 
             # 给支付宝
             return Response("success")

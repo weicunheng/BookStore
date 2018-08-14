@@ -1,11 +1,13 @@
 from rest_framework import pagination
-from apps.goods.models import BooksCategory,Books
+from apps.goods.models import BooksCategory,Books,Banner
 from rest_framework import mixins
 from rest_framework  import viewsets,filters
-from apps.goods.serializers import BookCategorySerilizer,BookGoodsViewSerializer
+from apps.goods.serializers import BookCategorySerilizer,BookGoodsViewSerializer,BannerViewSerializer
 from apps.goods.goodsfilter import BooksListFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
+from rest_framework_extensions.cache.mixins import CacheResponseMixin
+from rest_framework.throttling import UserRateThrottle,AnonRateThrottle
 
 
 # 图书分类
@@ -23,7 +25,8 @@ class BookPagination(pagination.PageNumberPagination):
 
 
 # 图书
-class BookGoodsView(mixins.ListModelMixin,
+class BookGoodsView(CacheResponseMixin,
+                    mixins.ListModelMixin,
                     mixins.RetrieveModelMixin,
                     viewsets.GenericViewSet):
 
@@ -32,6 +35,8 @@ class BookGoodsView(mixins.ListModelMixin,
     queryset = Books.objects.all().order_by("id")
     serializer_class = BookGoodsViewSerializer
     pagination_class = BookPagination
+    throttle_classes = (UserRateThrottle,AnonRateThrottle)
+
     filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
     #自定义过滤规则
     filter_class = BooksListFilter
@@ -42,10 +47,30 @@ class BookGoodsView(mixins.ListModelMixin,
 
 
     def retrieve(self, request, *args, **kwargs):
-
+        """
+        修改商品点击量
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         instance = self.get_object()
         instance.click_num += 1
         instance.save()
         serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+# Banner
+class BannerView(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    """
+    获取Banner列表
+    """
+    serializer_class = BannerViewSerializer
+    queryset = Banner.objects.all().order_by("index")
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 

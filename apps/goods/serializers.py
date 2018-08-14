@@ -33,3 +33,10 @@ class BookGoodsViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Books
         fields = "__all__"
+
+
+class BannerViewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Banner
+        fields = "__all__"

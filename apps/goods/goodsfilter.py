@@ -15,4 +15,4 @@ class BooksListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Books
-        fields = ['price__min','price__max',"name","is_hot"]
+        fields = ['price__min','price__max',"name","is_hot","is_new"]

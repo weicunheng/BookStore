@@ -4,8 +4,6 @@ from django.db import models
 from DjangoUeditor.models import UEditorField
 
 
-
-
 class BooksCategory(models.Model):
     """
     图书类别
@@ -85,7 +83,7 @@ class Books(models.Model):
     goods_front_image = models.ImageField(upload_to="goods/images/", null=True, blank=True, verbose_name="封面图")
     is_new = models.BooleanField(default=False, verbose_name="是否新品")
     is_hot = models.BooleanField(default=False, verbose_name="是否热销")
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
 
     class Meta:
         verbose_name = '商品'

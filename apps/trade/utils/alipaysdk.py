@@ -64,6 +64,8 @@ if __name__ == '__main__':
     sub_merchant.merchant_id = "2088102176051162"
     model.sub_merchant = sub_merchant
     request = AlipayTradePagePayRequest(biz_model=model)
+    request.return_url = "http://47.94.172.250:8804/page2/"
+    request.notify_url = "http://47.94.172.250:8804/page2/"
     # 得到构造的请求，如果http_method是GET，则是一个带完成请求参数的url，如果http_method是POST，则是一段HTML表单片段
     response = client.page_execute(request, http_method="GET")
     print("alipay.trade.page.pay response:" + response)

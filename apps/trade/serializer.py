@@ -94,9 +94,6 @@ class OrderSerializer(serializers.ModelSerializer):
     pay_time = serializers.DateTimeField(read_only=True)
 
     alipay_url = serializers.SerializerMethodField(read_only=True)
-    print(settings.app_id)
-    print(settings.app_private_key_path)
-    print(settings.alipay_public_key_path)
     def get_alipay_url(self,obj):
         alipay = AliPay(appid=settings.app_id,
                         app_notify_url=settings.app_notify_url,
@@ -128,7 +125,6 @@ class OrderSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
 
         attrs["order_sn"] = self.get_random_str()
-        print(attrs["order_sn"])
         return attrs
 
 

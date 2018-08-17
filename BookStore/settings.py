@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'corsheaders',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +82,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -153,6 +156,10 @@ LOGOIMAGE = "companylogo"
 
 AUTHENTICATION_BACKENDS=(
     "apps.user.autobackend.CustomBackend",
+    'social_core.backends.weixin.WeixinOAuth2',
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.qq.QQOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 
@@ -174,8 +181,8 @@ REST_FRAMEWORK = {
             'rest_framework.throttling.UserRateThrottle'
         ),
         'DEFAULT_THROTTLE_RATES': {
-            'anon': '1/minute',
-            'user': '3/minute'
+            'anon': '1000/minute',
+            'user': '1000/minute'
         }
 
 }
@@ -246,3 +253,14 @@ CACHES = {
     }
 }
 
+
+
+SOCIAL_AUTH_WEIBO_KEY = '3539749669'
+SOCIAL_AUTH_WEIBO_SECRET = 'fd0a20e70eb877bdf766fd4341e999ae'
+
+
+SOCIAL_AUTH_QQ_KEY = '10*****51'
+SOCIAL_AUTH_QQ_SECRET = '5807************d15bd97'
+SOCIAL_AUTH_WEIXIN_KEY = 'wx4fb***********599'            #开放平台应用的APPID
+SOCIAL_AUTH_WEIXIN_SECRET = 'f1c17************08c0489'    #开放平台应用的SECRET
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/'
